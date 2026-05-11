@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aradia: in the Vale of Elarune</title>
+  <meta name="description" content="Aradia: in the Vale of Elarune — a cozy dark fantasy adventure where magic isn't found. It's remembered." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Nunito:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --near-black: #12100A;
+      --deep-hollow: #1E1A14;
+      --midnight-plum: #1A1228;
+      --deep-violet: #2A1F3D;
+      --cream: #EDE0CC;
+      --cream-soft: rgba(237, 224, 204, 0.72);
+      --cream-dim: rgba(237, 224, 204, 0.42);
+      --purple: #9B7EC8;
+      --deep-purple: #5C4B8A;
+      --rose: #C4907A;
+      --muted-rose: #8A6E7F;
+      --gold: #C8A96E;
+      --green: #7C8F72;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--near-black);
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--near-black);
+      color: var(--cream);
+      font-family: "Nunito", sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site {
+      position: relative;
+      background:
+        radial-gradient(circle at 50% 16%, rgba(155, 126, 200, 0.12), transparent 32%),
+        linear-gradient(180deg, var(--midnight-plum) 0%, var(--deep-violet) 42%, var(--deep-hollow) 72%, var(--near-black) 100%);
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px clamp(22px, 4vw, 64px);
+      color: rgba(237, 224, 204, 0.64);
+      pointer-events: none;
+    }
+
+    .nav * {
+      pointer-events: auto;
+    }
+
+    .mark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.36em;
+      font-size: 0.68rem;
+    }
+
+    .mark svg {
+      width: 26px;
+      height: 26px;
+      color: var(--purple);
+      opacity: 0.9;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(16px, 2vw, 30px);
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      opacity: 0.62;
+      transition: opacity 250ms ease, color 250ms ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--gold);
+    }
+
+    .section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 96px clamp(20px, 5vw, 72px);
+      isolation: isolate;
+    }
+
+    .hero {
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, transparent 0%, rgba(18, 16, 10, 0.18) 52%, rgba(18, 16, 10, 0.78) 100%),
+        linear-gradient(180deg, rgba(18, 16, 10, 0.2), transparent 25%, rgba(18, 16, 10, 0.48));
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero::after,
+    .mist::after {
+      content: "";
+      position: absolute;
+      left: -12%;
+      right: -12%;
+      bottom: -14%;
+      height: 42vh;
+      z-index: 3;
+      opacity: 0.72;
+      filter: blur(30px);
+      background:
+        radial-gradient(ellipse at 50% 100%, rgba(237, 224, 204, 0.11), transparent 52%),
+        radial-gradient(ellipse at 35% 90%, rgba(196, 144, 122, 0.08), transparent 44%),
+        radial-gradient(ellipse at 70% 95%, rgba(155, 126, 200, 0.075), transparent 48%);
+      pointer-events: none;
+    }
+
+    #stars {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      opacity: 0.78;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      opacity: 0.04;
+      pointer-events: none;
+      background-image:
+        linear-gradient(0deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 5px 5px;
+      mix-blend-mode: soft-light;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 4;
+      width: min(940px, 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 32px;
+    }
+
+    .moon {
+      width: clamp(52px, 7vw, 76px);
+      height: clamp(52px, 7vw, 76px);
+      margin-bottom: 38px;
+      color: var(--purple);
+      opacity: 0.86;
+      filter: drop-shadow(0 0 20px rgba(155, 126, 200, 0.28));
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .kicker,
+    .coming,
+    .loading-label,
+    .footer-note,
+    .eyebrow {
+      font-size: clamp(0.68rem, 1vw, 0.78rem);
+      letter-spacing: 0.48em;
+      text-transform: uppercase;
+      color: rgba(237, 224, 204, 0.5);
+    }
+
+    .kicker {
+      margin-bottom: 24px;
+    }
+
+    h1,
+    h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 300;
+      color: var(--cream);
+    }
+
+    h1 {
+      font-size: clamp(4.4rem, 13vw, 10.8rem);
+      line-height: 0.8;
+      letter-spacing: 0.165em;
+      text-indent: 0.165em;
+      text-transform: uppercase;
+      text-shadow: 0 0 34px rgba(200, 169, 110, 0.08), 0 8px 36px rgba(18, 16, 10, 0.42);
+    }
+
+    .subtitle {
+      margin-top: 26px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.35rem, 3vw, 2.05rem);
+      font-style: italic;
+      font-weight: 300;
+      letter-spacing: 0.16em;
+      color: rgba(237, 224, 204, 0.66);
+    }
+
+    .divider {
+      width: min(560px, 86%);
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin: clamp(42px, 6vw, 62px) 0 clamp(32px, 4vw, 44px);
+      color: var(--purple);
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, rgba(155, 126, 200, 0.44));
+    }
+
+    .divider::after {
+      background: linear-gradient(90deg, rgba(155, 126, 200, 0.44), transparent);
+    }
+
+    .divider span {
+      font-size: clamp(0.88rem, 1.5vw, 1rem);
+      letter-spacing: 0.48em;
+      white-space: nowrap;
+      color: rgba(155, 126, 200, 0.82);
+    }
+
+    .tagline {
+      max-width: 740px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.22rem, 2.5vw, 1.78rem);
+      font-style: italic;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: rgba(237, 224, 204, 0.88);
+    }
+
+    .coming {
+      margin-top: 34px;
+      color: rgba(237, 224, 204, 0.48);
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      margin-top: clamp(44px, 6vw, 60px);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 260px;
+      min-height: 58px;
+      padding: 15px 30px;
+      border: 1px solid rgba(237, 224, 204, 0.32);
+      border-radius: 13px;
+      background: rgba(18, 16, 10, 0.14);
+      color: var(--cream);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-size: 0.9rem;
+      font-weight: 400;
+      box-shadow: 0 0 0 1px rgba(155, 126, 200, 0.05), 0 18px 60px rgba(18, 16, 10, 0.28);
+      transition: border-color 300ms ease, color 300ms ease, background 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      border-color: rgba(200, 169, 110, 0.72);
+      color: #fff3df;
+      background: rgba(200, 169, 110, 0.06);
+      transform: translateY(-2px);
+      box-shadow: 0 0 26px rgba(200, 169, 110, 0.12), 0 18px 70px rgba(18, 16, 10, 0.38);
+    }
+
+    .ghost-link {
+      color: rgba(237, 224, 204, 0.46);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.42em;
+      font-size: 0.76rem;
+      transition: color 300ms ease, letter-spacing 300ms ease;
+    }
+
+    .ghost-link:hover,
+    .ghost-link:focus-visible {
+      color: rgba(237, 224, 204, 0.78);
+      letter-spacing: 0.48em;
+    }
+
+    .loading {
+      width: min(330px, 74vw);
+      margin-top: clamp(58px, 8vw, 78px);
+    }
+
+    .loading-label {
+      margin-bottom: 9px;
+      color: rgba(155, 126, 200, 0.58);
+    }
+
+    .progress-track {
+      position: relative;
+      width: 100%;
+      height: 1px;
+      background: rgba(237, 224, 204, 0.12);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 57%;
+      background: linear-gradient(90deg, transparent, var(--purple), var(--gold));
+      animation: breathe 4.8s ease-in-out infinite;
+      transform-origin: left;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      left: 50%;
+      bottom: 34px;
+      z-index: 5;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      transform: translateX(-50%);
+      color: rgba(237, 224, 204, 0.72);
+      background: rgba(18, 16, 10, 0.34);
+      border: 1px solid rgba(237, 224, 204, 0.12);
+      text-decoration: none;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .world,
+    .hollow,
+    .journey {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(155, 126, 200, 0.08), transparent 38%),
+        linear-gradient(180deg, rgba(18, 16, 10, 0.98), rgba(30, 26, 20, 0.98));
+    }
+
+    .section-inner {
+      width: min(1180px, 100%);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 440px);
+      gap: clamp(32px, 6vw, 76px);
+      align-items: center;
+    }
+
+    .section-inner.reverse {
+      grid-template-columns: minmax(280px, 440px) minmax(0, 1fr);
+    }
+
+    .copy {
+      position: relative;
+      z-index: 3;
+    }
+
+    .eyebrow {
+      margin-bottom: 22px;
+      color: rgba(155, 126, 200, 0.68);
+    }
+
+    h2 {
+      font-size: clamp(3rem, 6vw, 6rem);
+      line-height: 0.9;
+      letter-spacing: 0.06em;
+      margin-bottom: 26px;
+    }
+
+    .copy p {
+      max-width: 520px;
+      font-size: clamp(1rem, 1.4vw, 1.16rem);
+      line-height: 1.85;
+      color: var(--cream-soft);
+    }
+
+    .quote {
+      margin-top: 34px;
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+      line-height: 1.35;
+      color: rgba(237, 224, 204, 0.9);
+    }
+
+    .art-card {
+      position: relative;
+      min-height: clamp(420px, 54vw, 680px);
+      border-radius: 28px;
+      overflow: hidden;
+      background: rgba(18, 16, 10, 0.5);
+      border: 1px solid rgba(237, 224, 204, 0.12);
+      box-shadow: 0 32px 120px rgba(0, 0, 0, 0.46);
+    }
+
+    .art-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at center, transparent 20%, rgba(18, 16, 10, 0.3) 72%, rgba(18, 16, 10, 0.72) 100%),
+        linear-gradient(180deg, transparent 0%, rgba(18, 16, 10, 0.26) 100%);
+    }
+
+    .art-card img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.92) contrast(0.96) brightness(0.92);
+      transform: scale(1.02);
+    }
+
+    .art-label {
+      position: absolute;
+      left: 24px;
+      bottom: 22px;
+      z-index: 4;
+      font-size: 0.68rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: rgba(237, 224, 204, 0.62);
+    }
+
+    .placeholder {
+      height: 100%;
+      min-height: inherit;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      text-align: center;
+      color: rgba(237, 224, 204, 0.52);
+      background:
+        radial-gradient(circle at 50% 34%, rgba(155, 126, 200, 0.2), transparent 32%),
+        linear-gradient(160deg, rgba(26, 18, 40, 0.95), rgba(18, 16, 10, 0.98));
+    }
+
+    .placeholder span {
+      max-width: 320px;
+      font-size: 0.78rem;
+      line-height: 1.8;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .lore-strip {
+      position: relative;
+      min-height: 62vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 96px 24px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(196, 144, 122, 0.08), transparent 32%),
+        linear-gradient(180deg, var(--deep-hollow), var(--midnight-plum));
+      overflow: hidden;
+    }
+
+    .lore-strip::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(237, 224, 204, 0.24) 1px, transparent 1px);
+      background-size: 84px 84px;
+      opacity: 0.08;
+    }
+
+    .lore-strip p {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 5vw, 4.6rem);
+      font-style: italic;
+      line-height: 1.1;
+      color: rgba(237, 224, 204, 0.9);
+    }
+
+    .journey .section-inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .journey .copy p {
+      margin-inline: auto;
+    }
+
+    .signup {
+      width: min(560px, 100%);
+      margin-top: 36px;
+      display: flex;
+      gap: 12px;
+      padding: 8px;
+      border: 1px solid rgba(237, 224, 204, 0.16);
+      border-radius: 16px;
+      background: rgba(18, 16, 10, 0.34);
+    }
+
+    .signup input {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--cream);
+      font-family: "Nunito", sans-serif;
+      padding: 0 16px;
+      font-size: 0.95rem;
+    }
+
+    .signup input::placeholder {
+      color: rgba(237, 224, 204, 0.34);
+    }
+
+    .signup button {
+      border: 1px solid rgba(200, 169, 110, 0.5);
+      border-radius: 12px;
+      background: rgba(200, 169, 110, 0.08);
+      color: var(--cream);
+      font-family: "Nunito", sans-serif;
+      padding: 14px 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.74rem;
+      cursor: pointer;
+      transition: background 250ms ease, transform 250ms ease;
+    }
+
+    .signup button:hover {
+      background: rgba(200, 169, 110, 0.14);
+      transform: translateY(-1px);
+    }
+
+    footer {
+      padding: 32px 24px 46px;
+      text-align: center;
+      background: var(--near-black);
+      color: rgba(237, 224, 204, 0.28);
+      font-size: 0.68rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+    }
+
+    footer span {
+      padding: 0 16px;
+      color: rgba(200, 169, 110, 0.38);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 900ms ease, transform 900ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.45; transform: scaleX(0.82); }
+      50% { opacity: 0.92; transform: scaleX(1); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.48; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 0.9; transform: translateX(-50%) translateY(5px); }
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        padding: 18px 18px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .mark {
+        letter-spacing: 0.24em;
+      }
+
+      h1 {
+        letter-spacing: 0.105em;
+        text-indent: 0.105em;
+      }
+
+      .kicker,
+      .coming,
+      .loading-label,
+      .footer-note,
+      .eyebrow,
+      .ghost-link {
+        letter-spacing: 0.32em;
+      }
+
+      .divider {
+        gap: 16px;
+      }
+
+      .divider span {
+        letter-spacing: 0.3em;
+      }
+
+      .section-inner,
+      .section-inner.reverse {
+        grid-template-columns: 1fr;
+      }
+
+      .section-inner.reverse .copy {
+        order: -1;
+      }
+
+      .art-card {
+        min-height: 430px;
+      }
+
+      .signup {
+        flex-direction: column;
+      }
+
+      .signup input {
+        min-height: 48px;
+      }
+
+      footer span {
+        display: block;
+        padding: 8px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <div class="grain" aria-hidden="true"></div>
+
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#top" class="mark" aria-label="Aradia home">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M63.7 13.2C51.1 16.9 41.9 28.6 41.9 42.5c0 16.9 13.7 30.6 30.6 30.6 5.1 0 9.9-1.2 14.1-3.4C80.1 80.7 68.1 88 54.3 88 33.4 88 16.5 71.1 16.5 50.2S33.4 12.4 54.3 12.4c3.2 0 6.4.4 9.4 1.2z" fill="none" stroke="currentColor" stroke-width="2" />
+        </svg>
+        <span>Aradia</span>
+      </a>
+      <div class="nav-links">
+        <a href="#vale">The Vale</a>
+        <a href="#hollow">The Hollow</a>
+        <a href="#journey">Follow</a>
+      </div>
+    </nav>
+
+    <header id="top" class="section hero mist">
+      <canvas id="stars" aria-hidden="true"></canvas>
+
+      <div class="hero-content reveal visible">
+        <svg class="moon" viewBox="0 0 100 100" role="img" aria-label="Crescent moon">
+          <path d="M63.7 13.2C51.1 16.9 41.9 28.6 41.9 42.5c0 16.9 13.7 30.6 30.6 30.6 5.1 0 9.9-1.2 14.1-3.4C80.1 80.7 68.1 88 54.3 88 33.4 88 16.5 71.1 16.5 50.2S33.4 12.4 54.3 12.4c3.2 0 6.4.4 9.4 1.2z" fill="none" stroke="currentColor" stroke-width="2" />
+          <circle cx="48" cy="35" r="1.4" fill="currentColor" opacity="0.55" />
+          <circle cx="59" cy="48" r="1.1" fill="currentColor" opacity="0.42" />
+          <circle cx="52" cy="56" r="0.9" fill="currentColor" opacity="0.35" />
+        </svg>
+
+        <p class="kicker">Aradia Studios</p>
+        <h1>Aradia</h1>
+        <p class="subtitle">in the Vale of Elarune</p>
+
+        <div class="divider" aria-hidden="true">
+          <span>grow · brew · enchant</span>
+        </div>
+
+        <p class="tagline">A cozy fantasy life where magic is remembered, not found.</p>
+        <p class="coming">Coming Soon</p>
+
+        <div class="actions">
+          <a class="button" href="#vale">Enter the Hollow</a>
+          <a class="ghost-link" href="#journey">Follow the Journey</a>
+        </div>
+
+        <div class="loading" aria-hidden="true">
+          <p class="loading-label">Entering the Hollow...</p>
+          <div class="progress-track"><div class="progress-fill"></div></div>
+        </div>
+      </div>
+
+      <a class="scroll-cue" href="#vale" aria-label="Scroll to The Vale">↓</a>
+    </header>
+
+    <section id="vale" class="section world">
+      <div class="section-inner">
+        <div class="art-card reveal">
+          <div class="placeholder">
+            <span>Replace this with your square world image: the cottage, valley, crescent moon, and distant keep.</span>
+          </div>
+          <div class="art-label">The Vale of Elarune</div>
+        </div>
+        <div class="copy reveal">
+          <p class="eyebrow">The World</p>
+          <h2>The Vale remembers.</h2>
+          <p>
+            Between whispering forests, moonlit waters, and lantern-warmed paths, the Vale of Elarune waits quietly for those who know how to listen.
+          </p>
+          <p class="quote">“Some places are discovered. Others remember you first.”</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lore-strip">
+      <p class="reveal">Magic is not taken from the world. It is tended, brewed, grown, and remembered.</p>
+    </section>
+
+    <section id="hollow" class="section hollow">
+      <div class="section-inner reverse">
+        <div class="copy reveal">
+          <p class="eyebrow">Your Home</p>
+          <h2>The Hollow</h2>
+          <p>
+            A crooked cottage at the edge of the woods. A warm window in the dark. Dried lavender, moon charms, old spellbooks, and a familiar who seems to know more than he should.
+          </p>
+          <p class="quote">Brew potions. Gather herbs. Rest by candlelight. Follow what glows.</p>
+        </div>
+        <div class="art-card reveal">
+          <div class="placeholder">
+            <span>Replace this with your cottage interior image: spellbook, lavender, candlelight, potion shelves, and Vesper in the window.</span>
+          </div>
+          <div class="art-label">The Hollow</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey" class="section journey">
+      <div class="section-inner">
+        <div class="copy reveal">
+          <p class="eyebrow">Coming Soon</p>
+          <h2>Follow the journey.</h2>
+          <p>
+            Aradia: in the Vale of Elarune is currently in development. Follow along as the world takes shape, one remembered path at a time.
+          </p>
+
+          <form class="signup" onsubmit="event.preventDefault(); alert('Newsletter signup placeholder — connect this to Framer Forms, Mailchimp, or ConvertKit.');">
+            <input type="email" placeholder="Your email address" aria-label="Email address" />
+            <button type="submit">Notify Me</button>
+          </form>
+
+          <div class="actions">
+            <a class="ghost-link" href="https://instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      The Vale remembers <span>·</span> Magic isn't found. It's remembered.
+    </footer>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resizeCanvas() {
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * ratio;
+      canvas.height = window.innerHeight * ratio;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      createStars();
+    }
+
+    function createStars() {
+      const count = Math.max(38, Math.floor(window.innerWidth / 20));
+      stars = Array.from({ length: count }, () => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight * 0.68,
+        r: Math.random() * 1.1 + 0.25,
+        a: Math.random() * 0.48 + 0.16,
+        pulse: Math.random() * Math.PI * 2
+      }));
+    }
+
+    function drawStars(time) {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      stars.forEach((star) => {
+        const shimmer = Math.sin(time * 0.0007 + star.pulse) * 0.13;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(237, 224, 204, ${Math.max(0.08, star.a + shimmer)})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(drawStars);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    requestAnimationFrame(drawStars);
+  </script>
+</body>
+</html>
