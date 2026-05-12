@@ -1,1 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>The Vale Remembers | Aradia Studios</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Nunito:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root {
+      --bg: #09070D;
+      --violet: #9B7EC8;
+      --deep-violet: #2A1F3D;
+      --gold: #C8A96E;
+      --cream: #E8DCC8;
+      --soft: rgba(232,220,200,0.72);
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      min-height:100vh;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at top, rgba(155,126,200,0.14), transparent 30%),
+        linear-gradient(to bottom, #140F1D 0%, #09070D 100%);
+      color:var(--cream);
+      font-family:"Nunito", sans-serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      position:relative;
+    }
+
+    /* STARS */
+
+    .stars{
+      position:absolute;
+      inset:0;
+      overflow:hidden;
+      z-index:0;
+    }
+
+    .stars span{
+      position:absolute;
+      width:2px;
+      height:2px;
+      background:rgba(255,255,255,0.8);
+      border-radius:50%;
+      animation: twinkle 5s infinite ease-in-out;
+    }
+
+    @keyframes twinkle{
+      0%,100%{opacity:0.2;}
+      50%{opacity:1;}
+    }
+
+    /* MIST */
+
+    .mist{
+      position:absolute;
+      width:140%;
+      height:400px;
+      background:radial-gradient(circle, rgba(255,255,255,0.06), transparent 70%);
+      filter:blur(70px);
+      bottom:-120px;
+      animation: drift 22s infinite alternate ease-in-out;
+      z-index:1;
+    }
+
+    @keyframes drift{
+      from{transform:translateX(-5%);}
+      to{transform:translateX(5%);}
+    }
+
+    /* CONTENT */
+
+    .container{
+      position:relative;
+      z-index:3;
+      width:min(760px,90%);
+      text-align:center;
+      padding:60px 40px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(10,8,14,0.42);
+      backdrop-filter:blur(10px);
+      border-radius:24px;
+      box-shadow:
+        0 0 80px rgba(0,0,0,0.5),
+        0 0 40px rgba(155,126,200,0.08);
+      animation: fadeUp 2s ease;
+    }
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .moon{
+      font-size:42px;
+      color:var(--violet);
+      margin-bottom:28px;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    @keyframes float{
+      0%,100%{transform:translateY(0);}
+      50%{transform:translateY(-8px);}
+    }
+
+    h1{
+      font-family:"Cormorant Garamond", serif;
+      font-size:clamp(2.5rem,6vw,5rem);
+      font-weight:300;
+      letter-spacing:0.12em;
+      color:var(--cream);
+      margin-bottom:22px;
+      text-transform:uppercase;
+    }
+
+    .line{
+      width:120px;
+      height:1px;
+      background:linear-gradient(to right, transparent, rgba(200,169,110,0.7), transparent);
+      margin:0 auto 34px auto;
+    }
+
+    p{
+      font-size:1.08rem;
+      line-height:2;
+      color:var(--soft);
+      margin-bottom:18px;
+    }
+
+    .italic{
+      font-family:"Cormorant Garamond", serif;
+      font-style:italic;
+      font-size:1.4rem;
+      color:rgba(232,220,200,0.9);
+      margin-top:26px;
+    }
+
+    .signature{
+      margin-top:40px;
+      color:var(--gold);
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      font-size:0.78rem;
+    }
+
+    .button{
+      margin-top:42px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:16px 34px;
+      border-radius:14px;
+      border:1px solid rgba(232,220,200,0.18);
+      color:var(--cream);
+      text-decoration:none;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      font-size:0.8rem;
+      background:rgba(255,255,255,0.03);
+      transition:all 0.35s ease;
+    }
+
+    .button:hover{
+      transform:translateY(-2px);
+      border-color:rgba(200,169,110,0.5);
+      background:rgba(200,169,110,0.08);
+      box-shadow:0 0 24px rgba(200,169,110,0.12);
+    }
+
+    .footer{
+      margin-top:38px;
+      font-size:0.72rem;
+      letter-spacing:0.32em;
+      text-transform:uppercase;
+      color:rgba(232,220,200,0.32);
+    }
+
+    @media(max-width:700px){
+
+      .container{
+        padding:48px 26px;
+      }
+
+      p{
+        font-size:1rem;
+      }
+
+      .italic{
+        font-size:1.2rem;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- STARS -->
+
+  <div class="stars">
+    <span style="top:10%; left:20%; animation-delay:0s;"></span>
+    <span style="top:18%; left:72%; animation-delay:1s;"></span>
+    <span style="top:30%; left:55%; animation-delay:2s;"></span>
+    <span style="top:70%; left:12%; animation-delay:1.5s;"></span>
+    <span style="top:82%; left:84%; animation-delay:3s;"></span>
+    <span style="top:45%; left:88%; animation-delay:2.5s;"></span>
+    <span style="top:60%; left:35%; animation-delay:4s;"></span>
+    <span style="top:24%; left:40%; animation-delay:3.5s;"></span>
+    <span style="top:76%; left:62%; animation-delay:2.2s;"></span>
+  </div>
+
+  <!-- MIST -->
+
+  <div class="mist"></div>
+
+  <!-- CONTENT -->
+
+  <main class="container">
+
+    <div class="moon">☾</div>
+
+    <h1>The Vale Remembers</h1>
+
+    <div class="line"></div>
+
+    <p>
+      You’ve crossed the threshold.
+    </p>
+
+    <p>
+      When the doors of the Hollow open,
+      you’ll be among the first to know.
+    </p>
+
+    <p class="italic">
+      Until then — the moon is waxing,
+      and something stirs in the Vale.
+    </p>
+
+    <div class="signature">
+      — Aradia Studios
+    </div>
+
+    <a href="https://aradiagame.com" class="button">
+      Return to the Vale
+    </a>
+
+    <div class="footer">
+      Magic isn't found. It's remembered.
+    </div>
+
+  </main>
+
+</body>
+</html>
