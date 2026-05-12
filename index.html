@@ -27,16 +27,9 @@
       --green: #7C8F72;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      scroll-behavior: smooth;
-      background: var(--near-black);
-    }
+    html { scroll-behavior: smooth; background: var(--near-black); }
 
     body {
       min-height: 100vh;
@@ -47,9 +40,7 @@
       overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-    }
+    a { color: inherit; }
 
     .site {
       position: relative;
@@ -72,9 +63,7 @@
       pointer-events: none;
     }
 
-    .nav * {
-      pointer-events: auto;
-    }
+    .nav * { pointer-events: auto; }
 
     .mark {
       display: flex;
@@ -86,12 +75,7 @@
       font-size: 0.68rem;
     }
 
-    .mark svg {
-      width: 26px;
-      height: 26px;
-      color: var(--purple);
-      opacity: 0.9;
-    }
+    .mark svg { width: 26px; height: 26px; color: var(--purple); opacity: 0.9; }
 
     .nav-links {
       display: flex;
@@ -108,10 +92,7 @@
       transition: opacity 250ms ease, color 250ms ease;
     }
 
-    .nav-links a:hover {
-      opacity: 1;
-      color: var(--gold);
-    }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
 
     .section {
       position: relative;
@@ -123,10 +104,7 @@
       isolation: isolate;
     }
 
-    .hero {
-      overflow: hidden;
-      text-align: center;
-    }
+    .hero { overflow: hidden; text-align: center; }
 
     .hero::before {
       content: "";
@@ -139,8 +117,7 @@
       pointer-events: none;
     }
 
-    .hero::after,
-    .mist::after {
+    .hero::after, .mist::after {
       content: "";
       position: absolute;
       left: -12%;
@@ -165,6 +142,44 @@
       height: 100%;
       opacity: 0.78;
     }
+
+    .clouds {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.22;
+      background:
+        radial-gradient(ellipse at 20% 28%, rgba(237, 224, 204, 0.08), transparent 36%),
+        radial-gradient(ellipse at 62% 22%, rgba(155, 126, 200, 0.10), transparent 40%),
+        radial-gradient(ellipse at 82% 42%, rgba(196, 144, 122, 0.06), transparent 34%),
+        radial-gradient(ellipse at 42% 58%, rgba(237, 224, 204, 0.05), transparent 38%);
+      filter: blur(22px);
+      animation: cloudDrift 34s ease-in-out infinite alternate;
+    }
+
+    .shooting-stars {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .shooting-stars span {
+      position: absolute;
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(237,224,204,0.8), transparent);
+      opacity: 0;
+      transform: rotate(-28deg);
+      filter: drop-shadow(0 0 8px rgba(237,224,204,0.45));
+      animation: shootingStar 9s linear infinite;
+    }
+
+    .shooting-stars span:nth-child(1) { top: 18%; left: 72%; animation-delay: 1s; }
+    .shooting-stars span:nth-child(2) { top: 32%; left: 88%; animation-delay: 5s; }
+    .shooting-stars span:nth-child(3) { top: 24%; left: 55%; animation-delay: 12s; }
 
     .grain {
       position: fixed;
@@ -199,27 +214,16 @@
       animation: float 8s ease-in-out infinite;
     }
 
-    .kicker,
-    .coming,
-    .loading-label,
-    .footer-note,
-    .eyebrow {
+    .kicker, .coming, .loading-label, .footer-note, .eyebrow {
       font-size: clamp(0.68rem, 1vw, 0.78rem);
       letter-spacing: 0.48em;
       text-transform: uppercase;
       color: rgba(237, 224, 204, 0.5);
     }
 
-    .kicker {
-      margin-bottom: 24px;
-    }
+    .kicker { margin-bottom: 24px; }
 
-    h1,
-    h2 {
-      font-family: "Cormorant Garamond", serif;
-      font-weight: 300;
-      color: var(--cream);
-    }
+    h1, h2 { font-family: "Cormorant Garamond", serif; font-weight: 300; color: var(--cream); }
 
     h1 {
       font-size: clamp(4.4rem, 13vw, 10.8rem);
@@ -249,17 +253,14 @@
       color: var(--purple);
     }
 
-    .divider::before,
-    .divider::after {
+    .divider::before, .divider::after {
       content: "";
       height: 1px;
       flex: 1;
       background: linear-gradient(90deg, transparent, rgba(155, 126, 200, 0.44));
     }
 
-    .divider::after {
-      background: linear-gradient(90deg, rgba(155, 126, 200, 0.44), transparent);
-    }
+    .divider::after { background: linear-gradient(90deg, rgba(155, 126, 200, 0.44), transparent); }
 
     .divider span {
       font-size: clamp(0.88rem, 1.5vw, 1rem);
@@ -278,10 +279,7 @@
       color: rgba(237, 224, 204, 0.88);
     }
 
-    .coming {
-      margin-top: 34px;
-      color: rgba(237, 224, 204, 0.48);
-    }
+    .coming { margin-top: 34px; color: rgba(237, 224, 204, 0.48); }
 
     .actions {
       display: flex;
@@ -311,8 +309,7 @@
       transition: border-color 300ms ease, color 300ms ease, background 300ms ease, transform 300ms ease, box-shadow 300ms ease;
     }
 
-    .button:hover,
-    .button:focus-visible {
+    .button:hover, .button:focus-visible {
       border-color: rgba(200, 169, 110, 0.72);
       color: #fff3df;
       background: rgba(200, 169, 110, 0.06);
@@ -329,21 +326,10 @@
       transition: color 300ms ease, letter-spacing 300ms ease;
     }
 
-    .ghost-link:hover,
-    .ghost-link:focus-visible {
-      color: rgba(237, 224, 204, 0.78);
-      letter-spacing: 0.48em;
-    }
+    .ghost-link:hover, .ghost-link:focus-visible { color: rgba(237, 224, 204, 0.78); letter-spacing: 0.48em; }
 
-    .loading {
-      width: min(330px, 74vw);
-      margin-top: clamp(58px, 8vw, 78px);
-    }
-
-    .loading-label {
-      margin-bottom: 9px;
-      color: rgba(155, 126, 200, 0.58);
-    }
+    .loading { width: min(330px, 74vw); margin-top: clamp(58px, 8vw, 78px); }
+    .loading-label { margin-bottom: 9px; color: rgba(155, 126, 200, 0.58); }
 
     .progress-track {
       position: relative;
@@ -380,9 +366,7 @@
       animation: pulse 3s ease-in-out infinite;
     }
 
-    .world,
-    .hollow,
-    .journey {
+    .world, .hollow, .journey {
       background:
         radial-gradient(circle at 50% 0%, rgba(155, 126, 200, 0.08), transparent 38%),
         linear-gradient(180deg, rgba(18, 16, 10, 0.98), rgba(30, 26, 20, 0.98));
@@ -396,19 +380,10 @@
       align-items: center;
     }
 
-    .section-inner.reverse {
-      grid-template-columns: minmax(280px, 440px) minmax(0, 1fr);
-    }
+    .section-inner.reverse { grid-template-columns: minmax(280px, 440px) minmax(0, 1fr); }
 
-    .copy {
-      position: relative;
-      z-index: 3;
-    }
-
-    .eyebrow {
-      margin-bottom: 22px;
-      color: rgba(155, 126, 200, 0.68);
-    }
+    .copy { position: relative; z-index: 3; }
+    .eyebrow { margin-bottom: 22px; color: rgba(155, 126, 200, 0.68); }
 
     h2 {
       font-size: clamp(3rem, 6vw, 6rem);
@@ -546,24 +521,21 @@
       justify-items: center;
     }
 
-    .journey .copy p {
-      margin-inline: auto;
-    }
+    .journey .copy p { margin-inline: auto; }
 
     .signup {
-  width: min(560px, 100%);
-  margin: 36px auto 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  padding: 8px;
-  border: 1px solid rgba(237, 224, 204, 0.16);
-  border-radius: 16px;
-  background: rgba(18, 16, 10, 0.34);
+      width: min(560px, 100%);
+      margin: 36px auto 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      padding: 8px;
+      border: 1px solid rgba(237, 224, 204, 0.16);
+      border-radius: 16px;
+      background: rgba(18, 16, 10, 0.34);
+    }
 
-}
-    
     .signup input {
       flex: 1;
       min-width: 0;
@@ -576,9 +548,7 @@
       font-size: 0.95rem;
     }
 
-    .signup input::placeholder {
-      color: rgba(237, 224, 204, 0.34);
-    }
+    .signup input::placeholder { color: rgba(237, 224, 204, 0.34); }
 
     .signup button {
       border: 1px solid rgba(200, 169, 110, 0.5);
@@ -594,10 +564,7 @@
       transition: background 250ms ease, transform 250ms ease;
     }
 
-    .signup button:hover {
-      background: rgba(200, 169, 110, 0.14);
-      transform: translateY(-1px);
-    }
+    .signup button:hover { background: rgba(200, 169, 110, 0.14); transform: translateY(-1px); }
 
     footer {
       padding: 32px 24px 46px;
@@ -609,21 +576,10 @@
       text-transform: uppercase;
     }
 
-    footer span {
-      padding: 0 16px;
-      color: rgba(200, 169, 110, 0.38);
-    }
+    footer span { padding: 0 16px; color: rgba(200, 169, 110, 0.38); }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 900ms ease, transform 900ms ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 900ms ease, transform 900ms ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     @keyframes breathe {
       0%, 100% { opacity: 0.45; transform: scaleX(0.82); }
@@ -639,140 +595,32 @@
       0%, 100% { opacity: 0.48; transform: translateX(-50%) translateY(0); }
       50% { opacity: 0.9; transform: translateX(-50%) translateY(5px); }
     }
-.clouds {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.22;
-  background:
-    radial-gradient(ellipse at 20% 28%, rgba(237, 224, 204, 0.08), transparent 36%),
-    radial-gradient(ellipse at 62% 22%, rgba(155, 126, 200, 0.10), transparent 40%),
-    radial-gradient(ellipse at 82% 42%, rgba(196, 144, 122, 0.06), transparent 34%),
-    radial-gradient(ellipse at 42% 58%, rgba(237, 224, 204, 0.05), transparent 38%);
-  filter: blur(22px);
-  animation: cloudDrift 34s ease-in-out infinite alternate;
-}
 
-.shooting-stars {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  overflow: hidden;
-}
+    @keyframes cloudDrift {
+      from { transform: translateX(-24px) translateY(0) scale(1); }
+      to { transform: translateX(28px) translateY(10px) scale(1.06); }
+    }
 
-.shooting-stars span {
-  position: absolute;
-  width: 120px;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(237,224,204,0.8), transparent);
-  opacity: 0;
-  transform: rotate(-28deg);
-  filter: drop-shadow(0 0 8px rgba(237,224,204,0.45));
-  animation: shootingStar 9s linear infinite;
-}
+    @keyframes shootingStar {
+      0%, 82% { opacity: 0; transform: translate(0, 0) rotate(-28deg); }
+      85% { opacity: 0.75; }
+      100% { opacity: 0; transform: translate(-420px, 190px) rotate(-28deg); }
+    }
 
-.shooting-stars span:nth-child(1) {
-  top: 18%;
-  left: 72%;
-  animation-delay: 1s;
-}
-
-.shooting-stars span:nth-child(2) {
-  top: 32%;
-  left: 88%;
-  animation-delay: 5s;
-}
-
-.shooting-stars span:nth-child(3) {
-  top: 24%;
-  left: 55%;
-  animation-delay: 12s;
-}
-
-@keyframes cloudDrift {
-  from {
-    transform: translateX(-24px) translateY(0) scale(1);
-  }
-  to {
-    transform: translateX(28px) translateY(10px) scale(1.06);
-  }
-}
-
-@keyframes shootingStar {
-  0%, 82% {
-    opacity: 0;
-    transform: translate(0, 0) rotate(-28deg);
-  }
-  85% {
-    opacity: 0.75;
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-420px, 190px) rotate(-28deg);
-  }
-}
     @media (max-width: 860px) {
-      .nav {
-        padding: 18px 18px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .mark {
-        letter-spacing: 0.24em;
-      }
-
-      h1 {
-        letter-spacing: 0.105em;
-        text-indent: 0.105em;
-      }
-
-      .kicker,
-      .coming,
-      .loading-label,
-      .footer-note,
-      .eyebrow,
-      .ghost-link {
-        letter-spacing: 0.32em;
-      }
-
-      .divider {
-        gap: 16px;
-      }
-
-      .divider span {
-        letter-spacing: 0.3em;
-      }
-
-      .section-inner,
-      .section-inner.reverse {
-        grid-template-columns: 1fr;
-      }
-
-      .section-inner.reverse .copy {
-        order: -1;
-      }
-
-      .art-card {
-        min-height: 430px;
-      }
-
-      .signup {
-        flex-direction: column;
-      }
-
-      .signup input {
-        min-height: 48px;
-      }
-
-      footer span {
-        display: block;
-        padding: 8px 0;
-      }
+      .nav { padding: 18px 18px; }
+      .nav-links { display: none; }
+      .mark { letter-spacing: 0.24em; }
+      h1 { letter-spacing: 0.105em; text-indent: 0.105em; }
+      .kicker, .coming, .loading-label, .footer-note, .eyebrow, .ghost-link { letter-spacing: 0.32em; }
+      .divider { gap: 16px; }
+      .divider span { letter-spacing: 0.3em; }
+      .section-inner, .section-inner.reverse { grid-template-columns: 1fr; }
+      .section-inner.reverse .copy { order: -1; }
+      .art-card { min-height: 430px; }
+      .signup { flex-direction: column; }
+      .signup input { min-height: 48px; }
+      footer span { display: block; padding: 8px 0; }
     }
   </style>
 </head>
@@ -795,13 +643,13 @@
     </nav>
 
     <header id="top" class="section hero mist">
+      <canvas id="stars" aria-hidden="true"></canvas>
       <div class="clouds" aria-hidden="true"></div>
-
-<div class="shooting-stars" aria-hidden="true">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
+      <div class="shooting-stars" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
       <div class="hero-content reveal visible">
         <svg class="moon" viewBox="0 0 100 100" role="img" aria-label="Crescent moon">
@@ -815,9 +663,7 @@
         <h1>Aradia</h1>
         <p class="subtitle">in the Vale of Elarune</p>
 
-        <div class="divider" aria-hidden="true">
-          <span>grow · brew · enchant</span>
-        </div>
+        <div class="divider" aria-hidden="true"><span>grow · brew · enchant</span></div>
 
         <p class="tagline">A cozy fantasy life where magic is remembered, not found.</p>
         <p class="coming">Coming Soon</p>
@@ -836,62 +682,46 @@
       <a class="scroll-cue" href="#vale" aria-label="Scroll to The Vale">↓</a>
     </header>
 
-   <section id="vale" class="section world">
-  <div class="section-inner">
-    <div class="art-card reveal">
-      <img src="https://raw.githubusercontent.com/Amaben0506/aradia-site/main/image.png" alt="The Vale of Elarune" class="world-image">
-      <div class="art-label">The Vale of Elarune</div>
-    </div>
-    <div class="copy reveal">
-      <p class="eyebrow">The World</p>
-      <h2>The Vale remembers.</h2>
-      <p>
-        Between whispering forests, moonlit waters, and lantern-warmed paths,
-        the Vale of Elarune waits quietly for those who know how to listen.
-      </p>
-      <p class="quote">
-        “Some places are discovered. Others remember you first.”
-      </p>
-    </div>
-  </div>
-</section>
+    <section id="vale" class="section world">
+      <div class="section-inner">
+        <div class="art-card reveal">
+          <img src="https://raw.githubusercontent.com/Amaben0506/aradia-site/main/image.png" alt="The Vale of Elarune" class="world-image">
+          <div class="art-label">The Vale of Elarune</div>
+        </div>
+        <div class="copy reveal">
+          <p class="eyebrow">The World</p>
+          <h2>The Vale remembers.</h2>
+          <p>Between whispering forests, moonlit waters, and lantern-warmed paths, the Vale of Elarune waits quietly for those who know how to listen.</p>
+          <p class="quote">“Some places are discovered. Others remember you first.”</p>
+        </div>
+      </div>
+    </section>
+
     <section class="lore-strip">
       <p class="reveal">Magic is not taken from the world. It is tended, brewed, grown, and remembered.</p>
     </section>
 
     <section id="hollow" class="section hollow">
-
-  <div class="section-inner reverse">
-
-    
-
-    <div class="copy reveal">
-      <p class="eyebrow">Your Home</p>
-      <h2>The Hollow</h2>
-      <p>
-        A crooked cottage at the edge of the woods. A warm window in the dark.
-        Dried lavender, moon charms, old spellbooks, and a familiar who seems
-        to know more than he should.
-      </p>
-      <p class="quote">
-        Brew potions. Gather herbs. Rest by candlelight. Follow what glows.
-      </p>
-    </div>
-    <div class="art-card reveal">
-      <img src="https://raw.githubusercontent.com/Amaben0506/aradia-site/main/the%20hollow-cottage.png" alt="The Hollow" class="world-image">
-      <div class="art-label">The Hollow</div>
-    </div>
-  </div>
-</section>
+      <div class="section-inner reverse">
+        <div class="copy reveal">
+          <p class="eyebrow">Your Home</p>
+          <h2>The Hollow</h2>
+          <p>A crooked cottage at the edge of the woods. A warm window in the dark. Dried lavender, moon charms, old spellbooks, and a familiar who seems to know more than he should.</p>
+          <p class="quote">Brew potions. Gather herbs. Rest by candlelight. Follow what glows.</p>
+        </div>
+        <div class="art-card reveal">
+          <img src="https://raw.githubusercontent.com/Amaben0506/aradia-site/main/the%20hollow-cottage.png" alt="The Hollow" class="world-image">
+          <div class="art-label">The Hollow</div>
+        </div>
+      </div>
+    </section>
 
     <section id="journey" class="section journey">
       <div class="section-inner">
         <div class="copy reveal">
           <p class="eyebrow">Coming Soon</p>
           <h2>Follow the journey.</h2>
-          <p>
-            Aradia: in the Vale of Elarune is currently in development. Follow along as the world takes shape, one remembered path at a time.
-          </p>
+          <p>Aradia: in the Vale of Elarune is currently in development. Follow along as the world takes shape, one remembered path at a time.</p>
 
           <form class="signup" onsubmit="event.preventDefault(); alert('Newsletter signup placeholder — connect this to Framer Forms, Mailchimp, or ConvertKit.');">
             <input type="email" placeholder="Your email address" aria-label="Email address" />
@@ -905,9 +735,7 @@
       </div>
     </section>
 
-    <footer>
-      The Vale remembers <span>·</span> Magic isn't found. It's remembered.
-    </footer>
+    <footer>The Vale remembers <span>·</span> Magic isn't found. It's remembered.</footer>
   </div>
 
   <script>
